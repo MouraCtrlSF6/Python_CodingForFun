@@ -16,4 +16,3 @@ for i in range(len(word)):
         f=0
 word = ''.join(n_word)
 print(f"NewSentenceIs: {word} \nAndItHas: {words} words.\n")
-
