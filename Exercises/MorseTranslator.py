@@ -1,3 +1,5 @@
+import re
+
 char_to_dots = {
   'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
   'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
@@ -10,15 +12,17 @@ char_to_dots = {
   ':': '---...', ',': '--..--', '=': '-...-', '!': '-.-.--', '.': '.-.-.-',
   '-': '-....-', '+': '.-.-.', '"': '.-..-.', '?': '..--.', '/': '-..-.'
 }
-index = list(char_to_dots)
+
 def morse(word):
-    n_word = list(word)
-    for i in range(len(word)):
-        for j in range(len(index)):
-            if word[i] == index[j] or word[i] == chr(ord(index[j]) + 32):
-                n_word[i] = char_to_dots[index[j]] + '  '
-    return n_word
+    morse_word = []
+    for letter in word:
+        for key in char_to_dots:
+            compare = key.lower() if re.match(r'[a-zA-Z]', key) else key
+
+            if letter.lower() == compare:
+                morse_word.append(char_to_dots[key] + '  ')
+
+    return ''.join(morse_word)
 
 word = input("Type a word: ")
-word = ''.join(morse(word))
-print(word, "\n\n")
+print(morse(word), "\n\n")
